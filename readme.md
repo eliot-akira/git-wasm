@@ -2,6 +2,25 @@
 
 This is a fork of [`wasm-git`](https://github.com/petersalomonsen/wasm-git) to merge new features from other forks and pull requests; and further develop the library to enable replacing the use of the `git` CLI in practical contexts.
 
+## Develop
+
+### Emscripten: Build
+
+```sh
+$ docker run -v .:/src/wasm-git --rm wasm-git-image /bin/bash -c "cd /src/wasm-git && git ls-files | xargs dos2unix && /src/wasm-git/docker_cleanup_and_build.sh Release SINGLE_FILE"
+```
+
+It builds a single JS file, `lg2.js`, which bundles the Wasm binary in encoded format. It's more convenient for loading, but with a bigger file size.
+
+```sh
+ls emscriptenbuild/libgit2/examples
+```
+
+Without the `SINGLE_FILE` option, it builds separately `lg2.js` and `lg2.wasm`.
+
+
+## Changes
+
 #### From `rraab-dev/master` [#99](https://github.com/petersalomonsen/wasm-git/pull/99)
 
 - Docker build: Added `Dockerfile` and `docker_cleanup_and_build.sh`

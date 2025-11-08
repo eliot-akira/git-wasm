@@ -1,5 +1,5 @@
 cd /src/wasm-git
-rm -rf libgit2
+# rm -rf libgit2
 rm -rf emscriptenbuild/libgit2
 rm -rf emscriptenbuild/CMakeFiles
 rm -f emscriptenbuild/lg2.wasm

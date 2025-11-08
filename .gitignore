@@ -1,5 +1,6 @@
 libgit2
 libgit2-*
+libgit2.tar.gz
 wasm-git-*.tgz
 lg2.js
 lg2.wasm

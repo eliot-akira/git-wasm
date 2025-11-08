@@ -1,12 +1,17 @@
 #!/bin/bash
 
-curl -L https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.1.tar.gz --output libgit2.tar.gz
-tar -xzf libgit2.tar.gz
-mv libgit2-1.8.1 libgit2
-rm libgit2.tar.gz
+# Don't download every time
+if [ ! -f "libgit2.tar.gz" ]; then
+  curl -L https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.1.tar.gz --output libgit2.tar.gz
+  tar -xzf libgit2.tar.gz
+  mv libgit2-1.8.1 libgit2
+  # rm libgit2.tar.gz
+fi
 rm libgit2/src/libgit2/transports/http.c
 cp -r libgit2patchedfiles/examples/* libgit2/examples/
-cp -r libgit2patchedfiles/src/* libgit2/src/libgit2/
+# cp -r libgit2patchedfiles/src/* libgit2/src/libgit2/
+cp -r libgit2patchedfiles/src/transports/* libgit2/src/libgit2/transports/
+cp -r libgit2patchedfiles/src/util/* libgit2/src/util/
 echo 'set(CMAKE_C90_STANDARD_COMPILE_OPTION "-std=gnu90")' >> libgit2/examples/CMakeLists.txt
 echo 'set(CMAKE_C90_STANDARD_COMPILE_OPTION "-std=gnu90")' >> libgit2/src/libgit2/CMakeLists.txt
 echo 'set(CMAKE_C90_STANDARD_COMPILE_OPTION "-std=gnu90")' >> libgit2/src/util/CMakeLists.txt
